@@ -4,6 +4,7 @@
 - Created `README.md`
 - Created `CHANGELOG.md`
 - Defined Version 0 checklist
+- Added looping menu in `main.py`
 
 #### Problems
 - `main.py` has not been implemented yet
