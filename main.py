@@ -17,6 +17,13 @@ def display_menu():
             print("Thank you for using Student Task Tracker")
             break
 
+def add_task()
+    print("Here you can add tasks.")
+    task_title = input("Enter task title: ")
+    task_subject = input("Enter task's subject: ")
+    task_due_date = input("Enter task's due date (in yyyy-mm-dd format): ")
+    task_status = "todo"
+    
 
 if __name__ == "__main__":
     display_menu()
