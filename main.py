@@ -1,4 +1,5 @@
 import os
+import json
 
 TASKS = []
 
@@ -97,6 +98,10 @@ def delete_task():
     except ValueError:
         print("Please enter a valid number.")
         wait_for_enter()
+
+def save_tasks():
+    clear_console()
+    
 
 if __name__ == "__main__":
     display_menu()
