@@ -1,3 +1,20 @@
+## 2026-05-19
+
+#### Added
+- Added task creation
+- Added task listing
+- Added mark task as done logic
+- Added delete task feature
+
+#### Fixed
+- Improved task listing pause behavior
+
+#### Problems
+- Tasks are not saved to `tasks.json` yet
+
+#### Next Step
+- Build Step 6: Save/Load tasks to/from .json file
+
 ## 2026-05-08
 
 #### Added

@@ -77,8 +77,10 @@ def mark_task_done():
             wait_for_enter()
         else:
             print("Invalid task number.")
+            wait_for_enter()
     except ValueError:
         print("Please enter a valid number.")
+        wait_for_enter()
 
 def delete_task():
     clear_console()
@@ -91,8 +93,10 @@ def delete_task():
             wait_for_enter()
         else:
             print("Invalid task number.")
+            wait_for_enter()
     except ValueError:
         print("Please enter a valid number.")
+        wait_for_enter()
 
 if __name__ == "__main__":
     display_menu()
