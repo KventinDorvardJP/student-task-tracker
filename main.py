@@ -1,5 +1,6 @@
 import os
 import json
+import pathlib
 
 TASKS = []
 
@@ -28,6 +29,10 @@ def display_menu():
                 mark_task_done()
             case "4":
                 delete_task()
+            case "5":
+                save_tasks()
+            case "6":
+                load_tasks()
             case "7":
                 print("Thank you for using Student Task Tracker")
                 break
@@ -101,7 +106,22 @@ def delete_task():
 
 def save_tasks():
     clear_console()
-    
+    with open("tasks.json", "w") as file:
+        json.dump(TASKS, file)
+    print("Tasks saved successfully!")
+    wait_for_enter()
+
+def load_tasks():
+    clear_console()
+    if pathlib.Path("tasks.json").is_file():
+        with open("tasks.json", "r") as file:
+            global TASKS
+            TASKS = json.load(file)
+        print("Tasks loaded successfully!")
+    else:
+        print("No saved tasks found.")
+    wait_for_enter()
+
 
 if __name__ == "__main__":
     display_menu()
