@@ -113,14 +113,14 @@ def delete_task():
 def save_tasks():
     clear_console()
     with open("tasks.json", "w", encoding="UTF-8") as file:
-        json.dump(TASKS, file, indent= 4)
+        json.dump(TASKS, file, indent=4)
     print("Tasks saved successfully!")
     wait_for_enter()
 
 def load_tasks():
     global TASKS
     if pathlib.Path("tasks.json").is_file():
-        with open("tasks.json", "r") as file:
+        with open("tasks.json", "r", encoding="UTF-8") as file:
             TASKS = json.load(file)
 
 

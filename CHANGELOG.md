@@ -1,6 +1,26 @@
 ## 2026-05-24
 
-I think every feature of ver.0 should be implimented and working by now
+#### Added
+- Added task creation
+- Added task listing
+- Added marking tasks as done
+- Added deleting tasks
+- Added saving tasks to `tasks.json`
+- Added automatic loading from `tasks.json` on startup
+
+#### Changed
+- Removed manual "Load tasks" menu option
+- Changed menu Exit option to 6
+
+#### Fixed
+- Added pause after invalid menu input
+- Made saved JSON easier to read with `indent=4`
+
+#### Problems
+- No known major problems for Version 0
+
+#### Next Step
+- Final test of Version 0
 
 ## 2026-05-19
 
