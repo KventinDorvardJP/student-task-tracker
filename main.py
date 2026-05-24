@@ -7,17 +7,24 @@ TASKS = []
 def clear_console():
     os.system("cls" if os.name == "nt" else "clear")
 
-def display_menu():
+def display_menu(startup):
     while True:
-        clear_console()
+        if startup == True:
+            clear_console()
+            if TASKS == []:
+                print("!!!No tasks from previous sessions found!!!\n\n")
+            else: 
+                print("Tasks from previous sessions loaded successfully!\n\n")
+            startup = False
+        else:
+            clear_console()
         print("Student Task Tracker\n\n")
         print("1. Add task")
         print("2. List tasks")
         print("3. Mark task as done")
         print("4. Delete task")
         print("5. Save tasks")
-        print("6. Load tasks")
-        print("7. Exit")
+        print("6. Exit")
         
         user_input = input("Choose a menu: ")
         match user_input:
@@ -32,12 +39,11 @@ def display_menu():
             case "5":
                 save_tasks()
             case "6":
-                load_tasks()
-            case "7":
                 print("Thank you for using Student Task Tracker")
                 break
             case _:
                 print("Invalid option. Please try again.")
+                wait_for_enter()
 
 def wait_for_enter():
     input("Press Enter to continue...")
@@ -106,22 +112,18 @@ def delete_task():
 
 def save_tasks():
     clear_console()
-    with open("tasks.json", "w") as file:
-        json.dump(TASKS, file)
+    with open("tasks.json", "w", encoding="UTF-8") as file:
+        json.dump(TASKS, file, indent= 4)
     print("Tasks saved successfully!")
     wait_for_enter()
 
 def load_tasks():
-    clear_console()
+    global TASKS
     if pathlib.Path("tasks.json").is_file():
         with open("tasks.json", "r") as file:
-            global TASKS
             TASKS = json.load(file)
-        print("Tasks loaded successfully!")
-    else:
-        print("No saved tasks found.")
-    wait_for_enter()
 
 
 if __name__ == "__main__":
-    display_menu()
+    load_tasks()
+    display_menu(startup=True)
