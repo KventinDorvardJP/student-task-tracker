@@ -1,3 +1,7 @@
+## 2026-05-24
+
+I think every feature of ver.0 should be implimented and working by now
+
 ## 2026-05-19
 
 #### Added
