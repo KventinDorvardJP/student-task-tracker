@@ -1,6 +1,7 @@
 import os
 import json
 import pathlib
+import database
 
 TASKS = []
 
@@ -55,6 +56,7 @@ def add_task():
     task_subject = input("Enter task's subject: ")
     task_due_date = input("Enter task's due date (in yyyy-mm-dd format): ")
     task_status = "todo"
+    database.add_task(task_title, task_subject, task_due_date)
     task = {
         "title": task_title,
         "subject": task_subject,
@@ -72,6 +74,12 @@ def list_tasks():
     else:
         for index, task in enumerate(TASKS):
             print(f"{index + 1}. {task['title']} - {task['subject']} - Due: {task['due_date']} - Status: {task['status']}")
+
+    print("-----------------------------------------")
+    print("Here your tasks fromthe database!")
+    tasks = database.get_tasks()
+    if len(tasks) == 0:
+        print("No tasks found.")
 
 def display_tasks():
     clear_console()
@@ -123,7 +131,7 @@ def load_tasks():
         with open("tasks.json", "r", encoding="UTF-8") as file:
             TASKS = json.load(file)
 
-
 if __name__ == "__main__":
     load_tasks()
+    database.initialize_database()
     display_menu(startup=True)
