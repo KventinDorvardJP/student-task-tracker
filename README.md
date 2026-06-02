@@ -2,8 +2,8 @@
 
 A simple Python command-line app for tracking school tasks.
 
-This is Version 0 of the project.  
-It uses Python lists and dictionaries, and saves tasks to a SQL database.
+This is Version 1 of the project.
+It uses SQLite to save and load tasks.
 
 ## Goal
 
