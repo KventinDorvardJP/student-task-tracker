@@ -1,3 +1,8 @@
+## 2026-06-02
+
+#### Added
+ - SQLite database inplimented instead of using .json
+
 ## 2026-05-24
 
 #### Added

@@ -13,7 +13,7 @@ The goal of this project is to practice:
 - Lists and dictionaries
 - User input
 - Basic command-line menus
-- Saving and loading data with JSON
+- Saving and loading data with SQLite
 
 ## Features
 
@@ -23,8 +23,8 @@ The program can:
 - List all tasks
 - Mark a task as done
 - Delete a task
-- Save tasks to `tasks.json`
-- Load tasks from `tasks.json`
+- Save tasks to a SQLite database
+- Load tasks from a SQLite database
 
 ## Task Structure
 

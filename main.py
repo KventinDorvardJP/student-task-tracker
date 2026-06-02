@@ -1,8 +1,6 @@
 import os
 import database
 
-TASKS = []
-
 def clear_console():
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -67,7 +65,11 @@ def mark_task_done():
     clear_console()
     tasks = list_tasks()
     try:
-        task_number = int(input("Enter the number of the task you want to mark as done: "))
+        task_number = int(input("Enter the number of the task you want to mark as done: ")) 
+        if task_number < 1 or task_number > len(tasks):
+            print("Please enter a valid number.")
+            wait_for_enter()
+            return
         selected_task = tasks[task_number - 1]
         task_id = selected_task[0]
         response = database.mark_task_done(task_id)
@@ -82,6 +84,10 @@ def delete_task():
     tasks = list_tasks()
     try:
         task_number = int(input("Enter the number of the task you want to delete: "))
+        if task_number < 1 or task_number > len(tasks):
+            print("Please enter a valid number.")
+            wait_for_enter()
+            return
         selected_task = tasks[task_number - 1]
         task_id = selected_task[0]
         response = database.delete_task(task_id)
