@@ -45,57 +45,58 @@ def add_task():
     print("Task added successfully!")
     wait_for_enter()
 
-def list_tasks():
-    print("Here you can see all your tasks.")
-    tasks = database.get_tasks()
+def list_tasks(tasks):
     if len(tasks) == 0:
         print("No tasks found.")
     else:
+        print("Here you can see all your tasks.")
         for index, task in enumerate(tasks):
             print(f"{index + 1}. {task[1]} - {task[2]} - Due: {task[3]} - Status: {task[4]}")
 
-    return tasks
-
 def display_tasks():
     clear_console()
-    list_tasks()
+    tasks = database.get_tasks()
+    list_tasks(tasks)
     wait_for_enter()
 
 def mark_task_done():
     clear_console()
-    tasks = list_tasks()
-    try:
-        task_number = int(input("Enter the number of the task you want to mark as done: ")) 
-        if task_number < 1 or task_number > len(tasks):
-            print("Please enter a valid number.")
-            wait_for_enter()
-            return
-        selected_task = tasks[task_number - 1]
-        task_id = selected_task[0]
-        response = database.mark_task_done(task_id)
-        print(response)
-        wait_for_enter()
-    except ValueError:
-        print("Please enter a valid number.")
-        wait_for_enter()
+    task_id = get_task_id_from_user()
+    if task_id is None:
+        return
+    response = database.mark_task_done(task_id)
+    print(response)
+    wait_for_enter()
 
 def delete_task():
     clear_console()
-    tasks = list_tasks()
+    task_id = get_task_id_from_user()
+    if task_id is None:
+        return
+    response = database.delete_task(task_id)
+    print(response)
+    wait_for_enter()
+
+def get_task_id_from_user():
+    tasks = database.get_tasks()
+    if len(tasks) == 0:
+        print("No tasks found.")
+        wait_for_enter()
+        return None
+    list_tasks(tasks)
     try:
-        task_number = int(input("Enter the number of the task you want to delete: "))
-        if task_number < 1 or task_number > len(tasks):
+        task_number = int(input("Enter the number of the task: "))
+        if 1 <= task_number <= len(tasks):
+            selected_task = tasks[task_number - 1]
+            return selected_task[0]
+        else:
             print("Please enter a valid number.")
             wait_for_enter()
-            return
-        selected_task = tasks[task_number - 1]
-        task_id = selected_task[0]
-        response = database.delete_task(task_id)
-        print(response)
-        wait_for_enter()
+            return None
     except ValueError:
         print("Please enter a valid number.")
         wait_for_enter()
+        return None
 
 if __name__ == "__main__":
     database.initialize_database()

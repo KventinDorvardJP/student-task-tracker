@@ -3,7 +3,7 @@
 A simple Python command-line app for tracking school tasks.
 
 This is Version 0 of the project.  
-It uses Python lists and dictionaries, and saves tasks to a JSON file.
+It uses Python lists and dictionaries, and saves tasks to a SQL database.
 
 ## Goal
 

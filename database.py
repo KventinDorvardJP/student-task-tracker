@@ -24,7 +24,7 @@ def add_task(title, subject, due_date):
 
 def get_tasks():
     conn = sqlite3.connect('tasks.db')
-    tasks = conn.execute("SELECT * FROM tasks").fetchall()
+    tasks = conn.execute("SELECT * FROM tasks ORDER BY id").fetchall()
     
     conn.close()
     return tasks
