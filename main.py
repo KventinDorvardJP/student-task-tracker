@@ -45,7 +45,7 @@ def add_task():
     print("Task added successfully!")
     wait_for_enter()
 
-def list_tasks(tasks):
+def display_task_list(tasks):
     if len(tasks) == 0:
         print("No tasks found.")
     else:
@@ -56,7 +56,7 @@ def list_tasks(tasks):
 
 def display_tasks():
     tasks = database.get_tasks()
-    list_tasks(tasks)
+    display_task_list(tasks)
     wait_for_enter()
 
 def mark_task_done():
@@ -81,7 +81,7 @@ def get_task_id_from_user():
         print("No tasks found.")
         wait_for_enter()
         return None
-    list_tasks(tasks)
+    display_task_list(tasks)
     try:
         task_number = int(input("Enter the number of the task: "))
         if 1 <= task_number <= len(tasks):
