@@ -49,18 +49,17 @@ def list_tasks(tasks):
     if len(tasks) == 0:
         print("No tasks found.")
     else:
+        clear_console()
         print("Here you can see all your tasks.")
         for index, task in enumerate(tasks):
             print(f"{index + 1}. {task[1]} - {task[2]} - Due: {task[3]} - Status: {task[4]}")
 
 def display_tasks():
-    clear_console()
     tasks = database.get_tasks()
     list_tasks(tasks)
     wait_for_enter()
 
 def mark_task_done():
-    clear_console()
     task_id = get_task_id_from_user()
     if task_id is None:
         return
@@ -69,7 +68,6 @@ def mark_task_done():
     wait_for_enter()
 
 def delete_task():
-    clear_console()
     task_id = get_task_id_from_user()
     if task_id is None:
         return
