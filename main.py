@@ -1,30 +1,21 @@
 import os
-import json
-import pathlib
+import database
 
 TASKS = []
 
 def clear_console():
     os.system("cls" if os.name == "nt" else "clear")
 
-def display_menu(startup):
+def display_menu():
     while True:
-        if startup == True:
-            clear_console()
-            if TASKS == []:
-                print("!!!No tasks from previous sessions found!!!\n\n")
-            else: 
-                print("Tasks from previous sessions loaded successfully!\n\n")
-            startup = False
-        else:
-            clear_console()
+        
+        clear_console()
         print("Student Task Tracker\n\n")
         print("1. Add task")
         print("2. List tasks")
         print("3. Mark task as done")
         print("4. Delete task")
-        print("5. Save tasks")
-        print("6. Exit")
+        print("5. Exit")
         
         user_input = input("Choose a menu: ")
         match user_input:
@@ -37,8 +28,6 @@ def display_menu(startup):
             case "4":
                 delete_task()
             case "5":
-                save_tasks()
-            case "6":
                 print("Thank you for using Student Task Tracker")
                 break
             case _:
@@ -54,24 +43,20 @@ def add_task():
     task_title = input("Enter task title: ")
     task_subject = input("Enter task's subject: ")
     task_due_date = input("Enter task's due date (in yyyy-mm-dd format): ")
-    task_status = "todo"
-    task = {
-        "title": task_title,
-        "subject": task_subject,
-        "due_date": task_due_date,
-        "status": task_status
-    }
-    TASKS.append(task)
+    database.add_task(task_title, task_subject, task_due_date)
     print("Task added successfully!")
     wait_for_enter()
 
 def list_tasks():
     print("Here you can see all your tasks.")
-    if len(TASKS) == 0:
+    tasks = database.get_tasks()
+    if len(tasks) == 0:
         print("No tasks found.")
     else:
-        for index, task in enumerate(TASKS):
-            print(f"{index + 1}. {task['title']} - {task['subject']} - Due: {task['due_date']} - Status: {task['status']}")
+        for index, task in enumerate(tasks):
+            print(f"{index + 1}. {task[1]} - {task[2]} - Due: {task[3]} - Status: {task[4]}")
+
+    return tasks
 
 def display_tasks():
     clear_console()
@@ -80,50 +65,32 @@ def display_tasks():
 
 def mark_task_done():
     clear_console()
-    list_tasks()
+    tasks = list_tasks()
     try:
-        task_index = int(input("Enter the number of the task you want to mark as done: ")) - 1
-        if 0 <= task_index < len(TASKS):
-            TASKS[task_index]['status'] = "done"
-            print("Task marked as done!")
-            wait_for_enter()
-        else:
-            print("Invalid task number.")
-            wait_for_enter()
+        task_number = int(input("Enter the number of the task you want to mark as done: "))
+        selected_task = tasks[task_number - 1]
+        task_id = selected_task[0]
+        response = database.mark_task_done(task_id)
+        print(response)
+        wait_for_enter()
     except ValueError:
         print("Please enter a valid number.")
         wait_for_enter()
 
 def delete_task():
     clear_console()
-    list_tasks()
+    tasks = list_tasks()
     try:
-        task_index = int(input("Enter the number of the task you want to delete: ")) - 1
-        if 0 <= task_index < len(TASKS):
-            del TASKS[task_index]
-            print("Task deleted successfully!")
-            wait_for_enter()
-        else:
-            print("Invalid task number.")
-            wait_for_enter()
+        task_number = int(input("Enter the number of the task you want to delete: "))
+        selected_task = tasks[task_number - 1]
+        task_id = selected_task[0]
+        response = database.delete_task(task_id)
+        print(response)
+        wait_for_enter()
     except ValueError:
         print("Please enter a valid number.")
         wait_for_enter()
 
-def save_tasks():
-    clear_console()
-    with open("tasks.json", "w", encoding="UTF-8") as file:
-        json.dump(TASKS, file, indent=4)
-    print("Tasks saved successfully!")
-    wait_for_enter()
-
-def load_tasks():
-    global TASKS
-    if pathlib.Path("tasks.json").is_file():
-        with open("tasks.json", "r", encoding="UTF-8") as file:
-            TASKS = json.load(file)
-
-
 if __name__ == "__main__":
-    load_tasks()
-    display_menu(startup=True)
+    database.initialize_database()
+    display_menu()
