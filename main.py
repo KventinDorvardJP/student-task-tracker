@@ -52,7 +52,8 @@ def display_task_list(tasks):
         clear_console()
         print("Here you can see all your tasks.")
         for index, task in enumerate(tasks):
-            print(f"{index + 1}. {task[1]} - {task[2]} - Due: {task[3]} - Status: {task[4]}")
+            task_id, title, subject, due_date, status = task
+            print(f"{index + 1}. {title} - {subject} - Due: {due_date} - Status: {status}")
 
 def display_tasks():
     tasks = database.get_tasks()
