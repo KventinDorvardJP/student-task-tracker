@@ -1,3 +1,8 @@
+## 2026-06-02
+
+#### Added
+- Replaced JSON storage with SQLite database storage
+
 ## 2026-05-24
 
 #### Added

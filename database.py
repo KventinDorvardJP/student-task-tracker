@@ -24,4 +24,36 @@ def add_task(title, subject, due_date):
 
 def get_tasks():
     conn = sqlite3.connect('tasks.db')
-    return conn.execute("SELECT * FROM tasks").fetchall()
+    tasks = conn.execute("SELECT * FROM tasks ORDER BY id").fetchall()
+    
+    conn.close()
+    return tasks
+
+def mark_task_done(task_id):
+    conn = sqlite3.connect('tasks.db')
+    status_row = conn.execute("SELECT status FROM tasks WHERE id = ?", [task_id]).fetchone()
+    if status_row is None:
+        conn.close()
+        response = "Task not found."
+    elif status_row[0] == "done":
+        conn.close()
+        response = "Task is already marked as done."
+    else:
+        conn.execute("UPDATE tasks SET status = 'done' WHERE id = ?", [task_id])
+        conn.commit()
+        conn.close()
+        response = "Task marked as done successfully!"
+    
+    return response
+
+def delete_task(task_id):
+    conn = sqlite3.connect('tasks.db')
+    cursor = conn.execute("DELETE FROM tasks WHERE id = ?", [task_id])
+
+    if cursor.rowcount == 0:
+        response = "Task not found."
+    else:
+        response = "Task deleted successfully!"
+    conn.commit()
+    conn.close()
+    return response
