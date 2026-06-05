@@ -1,3 +1,13 @@
+## Version 1.1 — Validation and Status Changes
+
+- [x] Validate task title is not empty
+- [x] Validate task subject is not empty
+- [x] Validate due date is not empty
+- [x] Validate due date format
+- [x] Change task status: todo / doing / done
+- [x] Test full validation and status flow
+- [x] Push stable checkpoint to GitHub
+
 ## Version 1 — SQLite Storage
 
 - [x] Create `tasks.db`
