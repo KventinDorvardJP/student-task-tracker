@@ -12,7 +12,7 @@ def display_menu():
         print("Student Task Tracker\n\n")
         print("1. Add task")
         print("2. List tasks")
-        print("3. Mark task as done")
+        print("3. Change task status")
         print("4. Delete task")
         print("5. Exit")
         
@@ -23,7 +23,7 @@ def display_menu():
             case "2":
                 display_tasks()
             case "3":
-                mark_task_done()
+                change_task_status()
             case "4":
                 delete_task()
             case "5":
@@ -81,11 +81,27 @@ def display_tasks():
     display_task_list(tasks)
     wait_for_enter()
 
-def mark_task_done():
+def change_task_status():
     task_id = get_task_id_from_user()
     if task_id is None:
         return
-    response = database.mark_task_done(task_id)
+    print("Choose a new status for a task:")
+    print("1 - TODO")
+    print("2 - Doing")
+    print("3 - DONE")
+    user_input = input("Choose a status: ")
+    match user_input:
+        case "1":
+            new_status = "todo"
+        case "2":
+            new_status = "doing"
+        case "3":
+            new_status = "done"
+        case _:
+                print("Invalid option. Please try again.")
+                wait_for_enter()
+                return
+    response = database.change_task_status(task_id, new_status)
     print(response)
     wait_for_enter()
 

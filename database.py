@@ -25,17 +25,17 @@ def get_tasks():
 
     return tasks
 
-def mark_task_done(task_id):
+def change_task_status(task_id, status):
     with closing(sqlite3.connect('tasks.db')) as conn:
         with conn:
             status_row = conn.execute("SELECT status FROM tasks WHERE id = ?", [task_id]).fetchone()
             if status_row is None:
                 response = "Task not found."
-            elif status_row[0] == "done":
-                response = "Task is already marked as done."
+            elif status_row[0] == status:
+                response = f"Task is already marked as {status}."
             else:
-                conn.execute("UPDATE tasks SET status = 'done' WHERE id = ?", [task_id])
-                response = "Task marked as done successfully!"
+                conn.execute("UPDATE tasks SET status = ? WHERE id = ?", [status, task_id])
+                response = "Task's status changed successfully!"
     
     return response
 

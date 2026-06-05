@@ -2,6 +2,7 @@
 
 #### Added
 - Added input validation for task title, subject, and due date
+- Implemented task status changes instead of only marking tasks as done
 
 ## 2026-06-02
 

@@ -21,7 +21,7 @@ The program can:
 
 - Add a task
 - List all tasks
-- Mark a task as done
+- Change task status: todo / doing / done
 - Delete a task
 - Save tasks to a SQLite database
 - Load tasks from a SQLite database
