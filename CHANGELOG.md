@@ -1,3 +1,8 @@
+## 2026-06-05
+
+#### Added
+- Added input validation for task title, subject, and due date
+
 ## 2026-06-02
 
 #### Added

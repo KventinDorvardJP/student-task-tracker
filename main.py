@@ -1,5 +1,6 @@
 import os
 import database
+from datetime import datetime
 
 def clear_console():
     os.system("cls" if os.name == "nt" else "clear")
@@ -33,14 +34,34 @@ def display_menu():
                 wait_for_enter()
 
 def wait_for_enter():
-    input("Press Enter to continue...")
+    input("Press Enter to continue...")  
 
 def add_task():
     clear_console()
     print("Here you can add tasks.")
-    task_title = input("Enter task title: ")
-    task_subject = input("Enter task's subject: ")
-    task_due_date = input("Enter task's due date (in yyyy-mm-dd format): ")
+    while True:
+        task_title = input("Enter task's title: ")
+        if task_title == "":
+            print("Task title cannot be empty!")
+        else: 
+            break
+    while True:
+        task_subject = input("Enter task's subject: ")
+        if task_subject == "":
+            print("Task subject cannot be empty!")
+        else: 
+            break
+    while True:
+        task_due_date = input("Enter task's due date (in yyyy-mm-dd format): ")
+        if task_due_date == "":
+            print("Due date cannot be empty!")
+        else:
+            try:
+                # Check that the input is a real date in yyyy-mm-dd format.
+                datetime.strptime(task_due_date, "%Y-%m-%d")
+                break
+            except ValueError:
+                print("Please enter a valid date in yyyy-mm-dd format.")
     database.add_task(task_title, task_subject, task_due_date)
     print("Task added successfully!")
     wait_for_enter()
