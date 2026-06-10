@@ -1,3 +1,16 @@
+## 2026-06-10
+
+#### Added
+- Started Django transition
+- Added Django Task model
+- Added initial migration for Task model
+- Registered Task model in Django admin
+
+#### Tested
+- Created a task in Django Admin
+- Changed task status
+- Deleted a task
+
 ## 2026-06-05
 
 #### Added
