@@ -1,1 +1,36 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+local_settings.py
+settings_local.py
+
+# SQLite databases
 tasks.db
+db.sqlite3
+*.sqlite3
+*.db
+
+# Django generated / local files
+staticfiles/
+media/
+
+# Logs
+*.log
+
+# VS Code local settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
