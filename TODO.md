@@ -76,10 +76,10 @@ Display tasks from the Django database on a normal webpage without using Django 
 
 ### Implementation Checklist
 
-* [ ] Create `tasks/urls.py`
-* [ ] Add a URL for the task-list page
-* [ ] Include the tasks URLs in `student_tracker/urls.py`
-* [ ] Create a `task_list` view
+* [x] Create `tasks/urls.py`
+* [x] Add a URL for the task-list page
+* [x] Include the tasks URLs in `student_tracker/urls.py`
+* [x] Create a `task_list` view
 * [ ] Query tasks using `Task.objects`
 * [ ] Create `tasks/templates/tasks/task_list.html`
 * [ ] Pass the tasks from the view to the template
